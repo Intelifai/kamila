@@ -49,9 +49,7 @@ jobs:
     environment:
       name: 'Stage'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    permissions:
-      id-token: write #This is required for requesting the JWT
-
+    
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
@@ -62,17 +60,10 @@ jobs:
         run: unzip release.zip
 
       
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_65A1371B5D204531AB6E53715EF7BE2A }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_6118198AA5A8420CAD0B3079982E44B6 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_A22CBE8142BD4CED8C8923A3C58B0C7C }}
-
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
           app-name: 'kamila'
           slot-name: 'Stage'
-          
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3E82AB218F6D4FD19D998DE454277DC1 }}

@@ -36,9 +36,9 @@ import { AppStateContext } from "../../state/AppProvider";
 import { useBoolean } from "@fluentui/react-hooks";
 
 const enum messageStatus {
-    NotRunning = "Not Running",
-    Processing = "Processing",
-    Done = "Done"
+    NotRunning = "Detenido",
+    Processing = "Procesando",
+    Done = "Terminado"
 }
 
 const Chat = () => {
